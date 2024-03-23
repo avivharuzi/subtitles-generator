@@ -1,5 +1,6 @@
+import { execa } from 'execa';
+
 import { isFileExists } from '../utils/isFileExists.js';
-import { spawnCommand } from '../utils/spawnCommand.js';
 import { getWhisperCPPExecuteFlags } from './getWhisperCPPExecuteFlags.js';
 import { getWhisperCPPModelFilePath } from './getWhisperCPPModelFilePath.js';
 import {
@@ -29,11 +30,11 @@ const isModelDownloaded = async (
 };
 
 const createExecFile = async () =>
-  await spawnCommand(`cd ${WHISPER_CPP_DIR} && make`);
+  await execa(`cd ${WHISPER_CPP_DIR} && make`, {
+    shell: true,
+  });
 
 const downloadModel = async (modelType: WhisperCPPModelType): Promise<void> => {
-  await spawnCommand('echo "hello"');
-
   if (await isModelDownloaded(modelType)) {
     console.info(`whisper.cpp model "${modelType}" was already downloaded`);
 
@@ -52,7 +53,9 @@ const downloadModel = async (modelType: WhisperCPPModelType): Promise<void> => {
 
   console.info(`whisper.cpp downloading model "${modelType}"...`);
 
-  await spawnCommand(`${scriptFilePath} ${modelType}`);
+  await execa(`${scriptFilePath} ${modelType}`, {
+    shell: true,
+  });
 
   console.info(`whisper.cpp model "${modelType}" was downloaded successfully`);
 
@@ -129,7 +132,9 @@ const execute = async (
 
   console.info(`executing whisper.cpp command: ${command}`);
 
-  await spawnCommand(command);
+  await execa(command, {
+    shell: true,
+  });
 };
 
 export const whisperCPP = {

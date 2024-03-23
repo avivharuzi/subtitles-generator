@@ -64,6 +64,8 @@ export const subtitlesGenerator = async (
     const whisperCPPOutputFilePath = path.join(tempDir, generateUUID());
     const outputFormat: WhisperCPPExecuteOutputFormat = 'json';
 
+    console.info('executing whisper.cpp');
+
     await whisperCPP.execute(whisperCPPInputFilePath, {
       outputFilePath: whisperCPPOutputFilePath,
       outputFormat,

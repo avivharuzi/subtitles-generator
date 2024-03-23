@@ -38,12 +38,13 @@
   "scripts": {
     "test": "jest",
     "start": "npm run build && node dist/index.js",
-    "start:cli": "npm run build && chmod +x ./dist/cli.js && ./dist/cli.js",
+    "start:cli": "npm run build && ./dist/cli.js",
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && chmod +x ./dist/cli.js",
     "release": "npm run build && npm publish"
   },
   "dependencies": {
+    "execa": "^8.0.1",
     "fluent-ffmpeg": "^2.1.2",
     "yargs": "^17.7.2"
   },
