@@ -18,6 +18,8 @@ interface WhisperCPPJSONOffsets {
   to: number; // 2340
 }
 
+const FILTER_TEXT_REGEX = /\[[^\]]*]/g;
+
 export const whisperCPPJSONToSRTContent = (jsonContent: string): string => {
   const json = JSON.parse(jsonContent) as WhisperCPPJSON;
 
@@ -25,12 +27,19 @@ export const whisperCPPJSONToSRTContent = (jsonContent: string): string => {
 
   let srtContent = '';
 
-  transcriptions.forEach((transcription, index) => {
-    srtContent += `${index + 1}\n`;
-    srtContent += `${transcription.timestamps.from} --> ${transcription.timestamps.to}\n`;
-    srtContent += `${transcription.text.trim()}\n`;
-    srtContent += '\n';
-  });
+  transcriptions
+    .filter((transcription) => {
+      const text = transcription.text.trim();
+      const newText = text.replace(FILTER_TEXT_REGEX, '').trim();
+
+      return newText !== '';
+    })
+    .forEach((transcription, index) => {
+      srtContent += `${index + 1}\n`;
+      srtContent += `${transcription.timestamps.from} --> ${transcription.timestamps.to}\n`;
+      srtContent += `${transcription.text.trim()}\n`;
+      srtContent += '\n';
+    });
 
   return srtContent;
 };
