@@ -12,9 +12,14 @@ import {
   WhisperCPPExecuteOutputFormat,
 } from './whisperCPP/whisperCPP.js';
 import { whisperCPPJSONToSRTContent } from './whisperCPP/whisperCPPJSONToSRT.js';
-import { WhisperCPPModelType } from './whisperCPP/whisperCPPModelType.js';
+import {
+  WHISPER_CPP_MODEL_TYPES,
+  WhisperCPPModelType,
+} from './whisperCPP/whisperCPPModelType.js';
 
 export type SubtitleGeneratorModelType = WhisperCPPModelType;
+
+export const SUBTITLE_GENERATOR_MODEL_TYPES = WHISPER_CPP_MODEL_TYPES;
 
 export type SubtitleGeneratorLanguage = WhisperCPPExecuteLanguage;
 
