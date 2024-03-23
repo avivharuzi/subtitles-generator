@@ -1,6 +1,6 @@
 {
   "name": "subtitles-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generate subtitles easily with ffmpeg and whisper",
   "keywords": [
     "nodejs",
@@ -23,7 +23,8 @@
   },
   "type": "module",
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "bindings/**/*"
   ],
   "bin": {
     "subtitles-generator": "./dist/cli.js"
