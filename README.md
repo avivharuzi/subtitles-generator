@@ -1,2 +1,3 @@
 # subtitles-generator
-Generate subtitles easily with ffmpeg and whisper
+
+Generate subtitles easily with ffmpeg and whisper.
