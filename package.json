@@ -37,6 +37,7 @@
   "scripts": {
     "test": "jest",
     "start": "npm run build && node dist/index.js",
+    "start:cli": "npm run build && chmod +x ./dist/cli.js && ./dist/cli.js",
     "clean": "rm -rf ./dist",
     "build": "npm run clean && tsc",
     "release": "npm run build && npm publish"
