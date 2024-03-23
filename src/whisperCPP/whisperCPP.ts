@@ -59,7 +59,7 @@ const downloadModel = async (modelType: WhisperCPPModelType): Promise<void> => {
   await createExecFile();
 };
 
-export type WhisperCPPExecutionOutputFormat =
+export type WhisperCPPExecuteOutputFormat =
   | 'txt'
   | 'vtt'
   | 'srt'
@@ -67,12 +67,14 @@ export type WhisperCPPExecutionOutputFormat =
   | 'csv'
   | 'json';
 
+export type WhisperCPPExecuteLanguage = 'auto' | string;
+
 export interface WhisperCPPExecuteOptions {
   outputFilePath: string;
-  outputFormat: WhisperCPPExecutionOutputFormat;
+  outputFormat: WhisperCPPExecuteOutputFormat;
   modelType?: WhisperCPPModelType;
   shouldTryToDownloadModel?: boolean;
-  language?: 'auto' | string;
+  language?: WhisperCPPExecuteLanguage;
   translateToEnglish?: boolean;
 }
 

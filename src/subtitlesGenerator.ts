@@ -8,17 +8,23 @@ import { generateUUID } from './utils/generateUUID.js';
 import { getTextFileContent } from './utils/getTextFileContent.js';
 import {
   whisperCPP,
-  WhisperCPPExecuteOptions,
-  WhisperCPPExecutionOutputFormat,
+  WhisperCPPExecuteLanguage,
+  WhisperCPPExecuteOutputFormat,
 } from './whisperCPP/whisperCPP.js';
 import { whisperCPPJSONToSRTContent } from './whisperCPP/whisperCPPJSONToSRT.js';
+import { WhisperCPPModelType } from './whisperCPP/whisperCPPModelType.js';
+
+export type SubtitleGeneratorModelType = WhisperCPPModelType;
+
+export type SubtitleGeneratorLanguage = WhisperCPPExecuteLanguage;
 
 export type SubtitlesGeneratorOptions = {
   outputFilePath?: string;
-} & Pick<
-  WhisperCPPExecuteOptions,
-  'modelType' | 'shouldTryToDownloadModel' | 'language' | 'translateToEnglish'
->;
+  modelType?: SubtitleGeneratorModelType;
+  shouldTryToDownloadModel?: boolean;
+  language?: SubtitleGeneratorLanguage;
+  translateToEnglish?: boolean;
+};
 
 const VALID_INPUT_FILE_WAV_EXTENSION = '.wav';
 
@@ -51,7 +57,7 @@ export const subtitlesGenerator = async (
     }
 
     const whisperCPPOutputFilePath = path.join(tempDir, generateUUID());
-    const outputFormat: WhisperCPPExecutionOutputFormat = 'json';
+    const outputFormat: WhisperCPPExecuteOutputFormat = 'json';
 
     await whisperCPP.execute(whisperCPPInputFilePath, {
       outputFilePath: whisperCPPOutputFilePath,
