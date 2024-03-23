@@ -1,0 +1,60 @@
+{
+  "name": "subtitles-generator",
+  "version": "0.0.1",
+  "description": "Generate subtitles easily with ffmpeg and whisper",
+  "keywords": [
+    "nodejs",
+    "subtitles",
+    "video",
+    "audio",
+    "whisper",
+    "ai"
+  ],
+  "homepage": "https://github.com/avivharuzi/subtitles-generator#readme",
+  "bugs": {
+    "url": "https://github.com/avivharuzi/subtitles-generator/issues",
+    "email": "avivharuzi@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Aviv Haruzi",
+    "email": "avivharuzi@gmail.com",
+    "url": "https://www.avivharuzi.com"
+  },
+  "type": "module",
+  "files": [
+    "dist/**/*"
+  ],
+  "bin": {
+    "subtitles-generator": "./dist/cli.js"
+  },
+  "exports": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avivharuzi/subtitles-generator.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "npm run build && node dist/index.js",
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && tsc",
+    "release": "npm run build && npm publish"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.30",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
