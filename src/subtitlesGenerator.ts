@@ -36,7 +36,7 @@ const VALID_INPUT_FILE_WAV_EXTENSION = '.wav';
 export const subtitlesGenerator = async (
   inputFilePath: string,
   options: SubtitlesGeneratorOptions = {},
-) => {
+): Promise<string> => {
   const tempDir = await createTempDir('subtitles-generator');
 
   try {
@@ -89,12 +89,15 @@ export const subtitlesGenerator = async (
       parsedInputFilePath.name,
     );
 
-    await createTextFile(
-      `${options.outputFilePath || outputFilePathAlternative}.srt`,
-      srtContent,
-    );
+    const srtOutputFilePath = `${options.outputFilePath || outputFilePathAlternative}.srt`;
+
+    await createTextFile(srtOutputFilePath, srtContent);
+
+    return srtOutputFilePath;
   } catch (error) {
     console.error(`Failed to generate subtitles, error: ${error?.toString()}`);
+
+    throw error;
   } finally {
     try {
       await deleteDir(tempDir);
